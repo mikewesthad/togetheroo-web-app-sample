@@ -1,0 +1,138 @@
+#drawing-app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+  @include no-select();
+
+  &>canvas {
+    margin: 0;
+    padding: 0;
+    border-radius: 20px;
+  }
+
+  #color-selector {
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    padding: 15px 15px 5px 15px;
+    display: inline-block;
+    // Position toolbox at bottom of drawing app
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 50%);  
+    z-index: 1; // Toolbox should be above canvas
+    background: white;
+    &>canvas {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+
+  #toolbox {
+    // Toolbox icon sizing
+    $tool-scale: 1.5; // Used to multiple by svg's natural dimensions
+
+    @include no-select();
+    // Basic styling
+    padding: 15px*$tool-scale 15px*$tool-scale 18px*$tool-scale 15px*$tool-scale;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    background-color: white; 
+    white-space: nowrap; // Prevent individual tools from wrapping
+    z-index: 2; // Toolbox should be above canvas
+    // Position toolbox at bottom of drawing app
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 50%);  
+    
+    #draw-tool-group, #color-group {      
+      display: inline-block;
+      vertical-align: bottom;
+      position: relative;
+    }
+
+    // Styling tools
+    svg {
+      display: inline-block;
+      vertical-align: bottom;
+
+      &#clear, &#undo {
+        width: $tool-scale * 38.33px;
+        height: $tool-scale * 38.33px;
+        margin: 0 6px;
+      }
+      &[id^="color"] {
+        width: $tool-scale * 38.33px;
+        height: $tool-scale * 38.33px;
+        margin: 0 0px;        
+      }
+      &#pencil {
+        width: $tool-scale * 16.5px;
+        height: $tool-scale * 40.67px;
+        margin: 0 10px;
+      }
+      &#marker {
+        width: $tool-scale * 16.48px;
+        height: $tool-scale * 40.34px;
+        margin: 0 10px;
+      }
+      &#crayon {
+        width: $tool-scale * 16.36px;
+        height: $tool-scale * 40.67px;
+        margin: 0 10px;
+      }
+      &#eraser {
+        width: $tool-scale * 16.36px;
+        height: $tool-scale * 40.29px;
+        margin: 0 10px;
+      }
+      &#active-triangle {
+        width: $tool-scale * 10.94px;
+        height: $tool-scale * 5.47px;
+        margin-top: $tool-scale * 5px;
+        position: absolute;
+      }
+
+      // Hide the template right away, so that the JS can copy it 
+      &#color-template {
+        display: none;
+      }
+      
+      @mixin toggle-active($name) {
+        &#{$name}, &#{$name}.inactive {
+          #{$name}-active { visibility: hidden; }
+          #{$name}-inactive { visibility: visible; }
+        }
+        &#{$name}.active {
+          #{$name}-active { visibility: visible; }
+          #{$name}-inactive { visibility: hidden; }
+        }
+      }
+      @include toggle-active(#clear);
+
+      // Unfortunately, this selector doesn't work with the toggle-active mixin
+      &[id^="color"], &[id^="color"].inactive {
+        [id$="-active"] { visibility: hidden; }
+        [id$="-inactive"] { visibility: visible; }
+      }
+      &[id^="color"].active {
+        [id$="-active"] { visibility: visible; }
+        [id$="-inactive"] { visibility: hidden; }
+      }
+
+      @mixin hover-active($name) {
+        &#{$name}:hover {
+          #{$name}-active { visibility: visible; }
+          #{$name}-inactive { visibility: hidden; }          
+        }        
+      }
+      @include hover-active(#clear);
+      
+    }
+  }
+}

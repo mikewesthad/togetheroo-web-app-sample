@@ -1,0 +1,22 @@
+/** 
+ * Styling omitted for features not in this demo
+ */
+
+// Vendor libraries
+@import "css/bootstrap.min"; // Leave off .css so gulp will inline the files
+
+// Styling from client's prototype, brought over and imported as CSS
+@import "css/togetheroo-prototype";
+
+// Styling for different aspects of the site
+@import "variables";
+@import "helpers";
+@import "fonts";
+@import "video-streams";
+@import "cursors";
+@import "nav";
+@import "core";
+
+// Styling for the individual playspaces
+@import "drawing-playspace";
+@import "smoothie-playspace";

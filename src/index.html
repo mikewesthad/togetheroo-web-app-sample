@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Togetheroo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 
+      OMITTED MARKUP/LINKS/SCRIPTS:
+      - Social sharing integration
+      - Signup form
+      - TokBox video streaming
+      - Google Analytics
+     -->
+
+    <!-- CSS -->
+    <link href="main.css" rel="stylesheet">
+  
+    <!-- LiveReload -->
+    <script>
+      if (location.hostname === "127.0.0.1" || location.hostname === "localhost") {
+        document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');
+      }
+    </script>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="196x196" href="/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="160x160" href="/favicon-160.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/favicon-57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon-72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon-144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon-60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon-76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/favicon-144.png">
+    <meta name="msapplication-config" content="/browserconfig.xml"> 
+  </head>
+
+  <body>
+    <header id="nav">
+      <div>
+        <img id="logo" src="images/togetheroologo.svg" width="246" height="50" title="logo"/>
+      </div>
+      <div id="navigation_wrap">
+        <div id="navigation">
+          <div id="urlfield">
+            <div id="urltext">
+              <div id="playspace-clipboard">togetheroo.com/playspace?id=012345678</div>
+            </div>
+          </div>
+          <div class="copybutton">
+            <div class="ticon-clip" id="copy-button" data-copied-message="#playspace-copied-message" data-clipboard-target="#playspace-clipboard"></div>
+            <svg style="display:none" id="playspace-copied-message" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 45.17"><title>copied-message</title><path d="M90.65,20.5H58L54.2,13.83,50.34,20.5H17.74A8.53,8.53,0,0,0,9.5,28.84V49.22a8.47,8.47,0,0,0,8.24,8.28H90.65a8.14,8.14,0,0,0,7.85-8.28V28.84C98.5,24.44,95.05,20.5,90.65,20.5Z" transform="translate(-9 -12.83)" style="fill:#fff;stroke:#6a93ff;stroke-miterlimit:10"/><text transform="translate(15.23 32.3)" style="font-size:20px;fill:#6a93ff;font-family:Bariol">Copied!</text></svg>
+          </div>
+          <ul id="navigationlinks">
+            <li class="navbutton">              
+              <div class="addthis_sharing_toolbox">
+                <a class="addthis_button_email">
+                  <div class="ticon-paperplane"></div>
+                  <div class="textlink1"></div>
+                </a>
+              </div>
+            </li>
+            <li id="get-updates" class="navbutton mailchimp-trigger" data-toggle="modal" data-target="#mailchimp-modal">
+              <div class="ticon-news"></div>
+              <div class="textlink4"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div id="playspace">
+      <div id="app"></div>
+      <div id="video-streams">
+        <div id="user-self" class="user-bubble" style="display:none">
+          <div class="draggable-handle"></div>
+          <div class="video-container">
+            <div class="draggable-handle"></div>
+            <div id="video-self" class="video-target"></div>
+          </div>          
+          <!-- 
+            Mask SVG
+            This SVG is going to be rotated, and since it is an irregular shape,
+            it needs to be set up in a particular way in illustrator:
+            - Create a rectangular artboard.
+            - Create the "bubble" mask.  Center the circle part of the bubble in
+              the artboard. (See player-bubble.ai to see some guides for how to 
+              center.)
+            - When exporting, select "Use Artboards" option.
+          -->
+          <svg class="mask" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280"><title>player-bubble</title><circle cx="140" cy="140" r="98.22" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:20px"/><polygon points="140 33.46 122.81 33.46 131.41 18.73 140 3.99 148.59 18.73 157.19 33.46 140 33.46"/></svg>
+        </div>
+        <div id="user-partner" class="user-bubble">
+          <div class="draggable-handle"></div>
+          <svg id="invite-playmate-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57.5 62.52"><title>invite-playmate-icon</title><path d="M30.94,35.09A16.93,16.93,0,1,1,47.87,18.16,17,17,0,0,1,30.94,35.09Zm0-28.65A11.72,11.72,0,1,0,42.66,18.16,11.73,11.73,0,0,0,30.94,6.44Z" transform="translate(-6 -1.23)" style="fill:#298aff"/><path d="M50.48,37.69a13,13,0,1,0,13,13A13,13,0,0,0,50.48,37.69Zm7.52,15H53v5H47v-5H42v-5h5v-5h6v5h5v5Z" transform="translate(-6 -1.23)" style="fill:#298aff"/><path d="M40.85,31a20,20,0,0,1,6.74,7,12.19,12.19,0,0,1,5.82,0,25.45,25.45,0,0,0-9.82-11.47A2.6,2.6,0,1,0,40.85,31Z" transform="translate(-6 -1.23)" style="fill:#298aff"/><path d="M37.45,50.74H11V48.67a21,21,0,0,1,9.71-17.58,2.63,2.63,0,0,0,.92-3.59A2.67,2.67,0,0,0,18,26.67a25.77,25.77,0,0,0-12,22v2.05a5.23,5.23,0,0,0,5.4,5H38.55C37.85,54.74,37.45,51.74,37.45,50.74Z" transform="translate(-6 -1.23)" style="fill:#298aff"/>
+          <div class="video-container">
+            <div id="video-partner" class="video-target"></div>
+          </div>
+          <div>
+            <svg class="mask" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280"><title>player-bubble</title><circle cx="140" cy="140" r="98.22" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:20px"/><polygon points="140 33.46 122.81 33.46 131.41 18.73 140 3.99 148.59 18.73 157.19 33.46 140 33.46"/></svg>
+          </div>
+        </div>
+      </div>
+      <div id="cursors"></div>
+    </div>
+
+    <div id="drawer_wrap">
+      <div id="drawer">
+
+        <div id="centerappnav">
+          <a href="" class="backdisabled"></a>
+          <a href="" class="forward"></a>
+        </div>
+          <ul id="drawer-list">
+            <li class="tile" id="blocks-app-button">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/letter-blocks.png" title="Letter Blocks">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Letter Blocks</div>
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-puzzle.png">
+              </div>
+            </li>
+            <li class="tile" id="drawing-app-button">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/creative-canvas.png" title="Creative Canvas">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Creative Canvas</div>
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-creative.png">
+              </div>
+            </li>
+            <li class="tile" id="smoothie-app-button">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/mix-n-match.png" title="Mix &amp; Match">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Mix &amp; Match</div>
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-game.png">
+              </div>
+            </li>
+            <li class="tile" id="spelling-app-button">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/letter-blocks.png" title="Spelling Game">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="applock">
+                <img src="images/app-drawer/icon_lock.svg" width="16px" title="upgrade to premium">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Spelling Game</div>
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-puzzle.png">
+              </div>
+            </li>
+            <li class="tile" data-toggle="modal" data-target="#mailchimp-modal">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/tan-wham.png" title="Tan-Wham!">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Tan-Wham!</div>
+              </div>
+              <div class="applock">
+                <img src="images/app-drawer/icon_lock.svg" width="16px" title="upgrade to premium">
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-puzzle.png">
+              </div>
+            </li>
+            <li class="tile" data-toggle="modal" data-target="#mailchimp-modal">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/beach-book.png" title="Beach Book">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Beach Book</div>
+              </div>
+              <div class="applock">
+                <img src="images/app-drawer/icon_lock.svg" width="16px" title="upgrade to premium">
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-book.png">
+              </div>
+            </li>
+            <li class="tile" data-toggle="modal" data-target="#mailchimp-modal">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/food-fight.png" title="Food Fight">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Food Fight</div>
+              </div>
+              <div class="applock">
+                <img src="images/app-drawer/icon_lock.svg" width="16px" title="upgrade to premium">
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-game.png">
+              </div>
+            </li>
+            <li class="tile" data-toggle="modal" data-target="#mailchimp-modal">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/stickers-and-stamps.png" title="Stamps &amp; Stickers">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Stamps &amp; Stickers</div>
+              </div>
+              <div class="applock">
+                <img src="images/app-drawer/icon_lock.svg" width="16px" title="upgrade to premium">
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-creative.png">
+              </div>
+            </li>
+            <li class="tile" data-toggle="modal" data-target="#mailchimp-modal">
+              <div class="appimage">
+                <img id="appoffset" src="images/app-drawer/block-builder.png" title="Block Builder">
+              </div>
+              <div class="appimageshadow">
+              </div>
+              <div class="descriptcontainer">
+                <div class="appdescript">Block Builder</div>
+              </div>
+              <div class="applock">
+                <img src="images/app-drawer/icon_lock.svg" width="16px" title="upgrade to premium">
+              </div>
+              <div class="appcategory">
+                <img src="images/app-drawer/category-game.png">
+              </div>
+            </li>
+          </ul>
+      </div>
+    </div>
+
+    <div id="playspace-full-modal" class="modal" role="dialog" data-backdrop="static">      
+      <div class="modal-dialog">
+        <div class="modal-shadow">
+          <div class="modal-content">
+            <header>
+              <h3>Uh Oh!</h3>
+            </header>
+            <div class="modal-text">
+              <p>It looks like two people are already using this play space. Please try again later!</p>
+            </div>
+            <footer>
+              <div class="modal-buttons">
+                <li>
+                  <a href="/" class="button button-blue">Ok</a>
+                </li>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remote Scripts -->
+    <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>    
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  
+    <!-- Local Scripts -->
+    <script src="js/libs.js"></script>
+    <script src="js/main.js"></script>    
+  </body>
+
+</html>
+

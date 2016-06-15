@@ -1,0 +1,70 @@
+$ring-width: 180px;
+$ring-height: 180px;
+$ring-thickness: 18px; 
+$ring-base-z-index: 1000; // Keep this lower than mailchimp and cursors 
+
+#user-self {
+  z-index: $ring-base-z-index + 1; // Keep self on top
+}
+
+#user-partner {
+  z-index: $ring-base-z-index;
+}
+
+.user-bubble {
+  display: none; // Let the JS make them visible
+  position: absolute;
+  @include no-select();
+
+  .mask {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 280px;
+    height: 280px;
+  }
+
+  .draggable-handle {
+    // Draggable handle is manually fudged in size by $ring-thickness to get it
+    // to match the size of the video container PLUS the svg ring
+    position: absolute;
+    width: $ring-width + (2 * $ring-thickness);
+    height: $ring-height + (2 * $ring-thickness);
+    top: -$ring-thickness;
+    left: -$ring-thickness;
+    border-radius: 50%;
+    z-index: 1; // Handle on top of video container
+  }
+
+  #invite-playmate-icon {
+    position: absolute;
+    $playmate-icon-width: 80px;
+    $playmate-icon-height: 80px;
+    width: $playmate-icon-width;
+    height: $playmate-icon-height;
+    // Centering, with some manual tweaks
+    left: ($ring-width / 2) - ($playmate-icon-width / 2) + 6px;
+    top: ($ring-height / 2) - ($playmate-icon-height / 2) + 1px;
+    z-index: 2; // Invite icon must be on top of draggable handle
+  }
+
+  .video-container {
+    position: relative;
+    border-radius: 50%;
+    width: $ring-width;
+    height: $ring-height;
+    overflow: hidden;
+    z-index: 0; // Video below handle
+
+    .video-target {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      
+      .OT_root > .OT_edge-bar-item {
+        // Hide the mute icon until there's a better solution
+        display: none !important;
+      }
+    }
+  }
+}

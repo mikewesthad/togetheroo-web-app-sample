@@ -1,0 +1,70 @@
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-size: 100%;
+  background-color: #fefefe;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  display: none;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
+  line-height: 95px;
+  padding: 15px 0;
+  background-size: contain;
+  z-index: 1001;
+
+  #input-playspace-url {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    display: inline-block;
+    height: 32px;
+    width: 450px;
+    border: 1px solid #ccc;
+    line-height: 32px;
+    padding: 0 8px;
+    font-size: 18px;
+  }
+
+  .share-cta {
+    display: inline-block;
+    text-align: right;
+    color: #888;
+    float: left;
+    margin-top: 37px;
+    font-weight: 200;
+    font-size: 18px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .addthis_toolbox {
+    display: inline-block;
+    margin-bottom: -9px;
+    width: 200px;
+  }
+
+  .btn-config {
+    display: none;
+    color: #999;
+    cursor: pointer;
+  }
+}
+
+#playspace {
+  position: relative;
+  width: 100%;
+  height: calc(100% - (#{$header-height} + #{$footer-height});
+  overflow: hidden;
+  @include no-select();
+}

@@ -1,0 +1,13 @@
+#cursors {
+  .cursor {
+    position: absolute;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    border: 1px dotted black;
+    z-index: 2000;
+    pointer-events: none; // Prevent cursor from capturing mouse events
+  }
+}

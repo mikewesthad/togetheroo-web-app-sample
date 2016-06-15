@@ -1,0 +1,14 @@
+@mixin no-select() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;    
+  -ms-user-select: none;
+  user-select: none; 
+}
+
+@mixin absolute-center-at($x: 50%, $y: 50%) {
+	position: absolute;
+	left: $x;
+	top: $y;
+	transform: translate(-50%, -50%);
+}

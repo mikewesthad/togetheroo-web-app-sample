@@ -1,0 +1,17 @@
+#smoothie-app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+  @include no-select();
+
+  canvas {
+    margin: 0;
+    padding: 0;
+    border-radius: 20px;
+  }
+}
